@@ -1,10 +1,10 @@
 export type UserType = {
     id?: number;
     username: string;
-    firstname: string;
-    lastname: string;
+    firstname?: string;
+    lastname?: string;
     email?: string;
-    number: number;
+    number?: number;
     address?: string;
     password: string;
     confirm_password?: string;
