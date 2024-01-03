@@ -1,5 +1,16 @@
 const { connect } = require("../database/database");
 
+const addCart = ( request, response ) => {
+
+    const { user_id, username } = request.headers['custom-header'];
+    const { id, title, description, price, iaage } = request.body;
+
+    continue this tomorow, add if !user_id  blah blah
+
+    then inset carts
+
+}
+
 const getCarts = ( request, response ) => {
 
     const { id } = request.params;
@@ -44,5 +55,6 @@ const getCarts = ( request, response ) => {
 }
 
 module.exports = {
+    addCart,
     getCarts
 }
