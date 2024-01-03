@@ -9,3 +9,12 @@ export type UserType = {
     password: string;
     confirm_password?: string;
 }
+
+export type ProductsType = {
+    id?: number;
+    title: string;
+    description: string;
+    price: number;
+    category?: string;
+    image: string;
+}
