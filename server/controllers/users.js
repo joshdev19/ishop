@@ -81,6 +81,63 @@ const signup = ( request, response ) => {
 
 }
 
+const login = ( request, response ) => {
+
+    const { username, password } = request.body;
+
+    if ( !username && !password ) return response.status(400).send(
+        {
+            message: "Fields are required"
+        }
+    )
+
+    if ( !username ) return response.status(400).send(
+        {
+            message: "Username is required"
+        }
+    )
+
+    if ( !password ) return response.status(400).send(
+        {
+            message: "Password is required"
+        }
+    )
+
+    const stmt = "select ishop_users.password from ishop_users where username = ?";
+
+    connect().query( stmt, [ username ], ( err, result ) => {
+
+        if ( err ) return response.status(400).send(
+            {
+                message: "An error occured. Please try again"
+            }
+        )
+
+        if ( !result.length ) return response.status(400).send(
+            {
+                message: "Wrong Credential"
+            }
+        )
+        
+        const isValid = comapare_password( password, result[0]?.password );
+        
+        if ( !isValid ) return response.status(400).send(
+            {
+                message: "Wrong Credential"
+            }
+        )
+        
+        response.status(200).send(
+            {
+                message: "Logged In Successfully"
+            }
+        )
+        
+    })
+
+}
+
 module.exports = {
-    signup
+    signup,
+    login
 }
