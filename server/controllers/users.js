@@ -137,7 +137,62 @@ const login = ( request, response ) => {
 
 }
 
+const userAnthenticating = ( request, response ) => {
+
+    const { user_id, username } = request.body;
+
+    if ( !user_id && username ) return response.status(401).send(
+        {
+            message: "Unauthorized"
+        }
+    )
+
+    if ( !user_id ) return response.status(401).send(
+        {
+            message: "Unauthorized"
+        }
+    )
+
+    if ( !username ) return response.status(401).send(
+        {
+            message: "Unauthorized"
+        }
+    )
+
+    const stmt = "select * from ishop_sessions where user_id = ? and username = ?";
+
+    connect().query( stmt, [ user_id, username ], ( err, result ) => {
+
+        if ( err ) return response.status(400).send(
+            {
+                message: "An error occured. Please try again"
+            }
+        )
+
+        if ( !result.length ) return response.status(403).send(
+            {
+                message: "Forbidden: This user is no longer exist" // or wrong username
+            }
+        )
+
+        response.status(200).send(
+            {
+                message: "Authorized"
+            }
+        )
+
+    })
+
+    connect().end( err => {
+
+        if ( err ) console.log(err);
+
+    })
+
+}
+
 module.exports = {
     signup,
-    login
+    login,
+    userAnthenticating
 }
