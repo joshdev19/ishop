@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductsType } from "../types/types";
 import ProductItems from "../components/ProductItems";
+import Navbar from "../components/Navbar";
 
 const Products = () => {
 
@@ -15,11 +16,11 @@ const Products = () => {
 
     }, [ setData ])
 
-    data && console.log(data);
-
     return (
         <div className="wrapper products-wrapper">
 
+            <Navbar/>
+            
             {
                 data && data?.map( p => {
 

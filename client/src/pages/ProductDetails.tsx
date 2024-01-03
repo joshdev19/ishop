@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { ProductsType } from "../types/types";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 const ProductDetails = () => {
 
@@ -16,11 +17,12 @@ const ProductDetails = () => {
         .catch( err => console.log(err))
 
     }, [ setData ])
-    data && console.log(data);
 
     return (
         
         <div className="wrapper products-detail-wrapper">
+
+            <Navbar/>
 
             <div className="product-detail-container">
 
