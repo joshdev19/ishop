@@ -10,6 +10,26 @@ const ProductDetails = () => {
 
     const [ data, setData ] = useState<ProductsType>();
 
+    const addToCart = async () => {
+
+        try {
+            
+            const request = await axios.post('/carts', data);
+
+            const response = await request.data;
+            
+            console.log(response)
+
+        } catch (error) {
+        
+            console.log(error)
+
+        }
+
+    }
+
+    console.log(data)
+
     useEffect(() => {
 
         axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -46,7 +66,7 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="buttons-wrapper">
-                        <button type="button"> Add To Cart </button>
+                        <button type="button" onClick={ addToCart }> Add To Cart </button>
                         <button type="button"> Buy Now </button>
                     </div>
 
