@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { ProductsType } from "../types/types";
-import axios from "axios";
+import axios, { AxiosHeaderValue } from "axios";
 import Navbar from "../components/Navbar";
 
 const ProductDetails = () => {
@@ -10,13 +10,23 @@ const ProductDetails = () => {
 
     const [ data, setData ] = useState<ProductsType>();
 
+    const testValues: string | object = {
+        user_id: '2b4e8983-7fa1-4a29-b6f3-4ee051dc61f0',
+        username: 'jinshin.19'
+    }
+
+    const headers : AxiosHeaderValue | object = {
+        "Custom-Header": JSON.stringify(testValues)
+    }
+
     const addToCart = async () => {
 
         try {
             
-            const request = await axios.post('/carts', data);
+            const request = await axios.post('/carts', data, { headers });
 
             const response = await request.data;
+            console.log(data)
             
             console.log(response)
 
@@ -27,8 +37,6 @@ const ProductDetails = () => {
         }
 
     }
-
-    console.log(data)
 
     useEffect(() => {
 

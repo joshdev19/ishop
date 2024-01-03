@@ -12,9 +12,9 @@ export type UserType = {
 
 export type ProductsType = {
     id?: number;
-    title: string;
-    description: string;
-    price: number;
+    title?: string;
+    description?: string;
+    price?: number;
     category?: string;
-    image: string;
+    image?: string;
 }
