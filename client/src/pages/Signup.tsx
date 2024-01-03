@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { UserType } from "../types/types";
+import axios from "axios";
 
 const Signup = () => {
 
@@ -20,6 +21,24 @@ const Signup = () => {
         const value = e.target.value;
 
         setValues( ( prev ) => ( { ...prev, [ name ]: value } ) )
+
+    }
+
+    const signupHandler = async () => {
+
+        try {
+            
+            const request = await axios.post('/users', values);
+
+            const response = await request.data;
+            
+            console.log(response)
+
+        } catch (error) {
+            
+            console.log(error)
+
+        }
 
     }
 
@@ -73,7 +92,7 @@ const Signup = () => {
                 </div>
 
                 <div className="buttons-wrapper">
-                    <button type="button"> Signup </button>
+                    <button type="button" onClick={ signupHandler }> Signup </button>
                 </div>
 
             </form>
