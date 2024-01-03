@@ -28,7 +28,7 @@ const Signup = () => {
 
         try {
             
-            const request = await axios.post('/users', values);
+            const request = await axios.post('/signup', values);
 
             const response = await request.data;
             
