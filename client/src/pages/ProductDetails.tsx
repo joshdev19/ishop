@@ -1,30 +1,51 @@
-import { ProductsType } from "../types/types"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
+import { ProductsType } from "../types/types";
+import axios from "axios";
 
-const ProductDetails = ( { id, title, category, description, image, price }:ProductsType ) => {
+const ProductDetails = () => {
+
+    const { id } = useParams();
+
+    const [ data, setData ] = useState<ProductsType>();
+
+    useEffect(() => {
+
+        axios.get(`https://fakestoreapi.com/products/${id}`)
+        .then( res => setData( res.data ) )
+        .catch( err => console.log(err))
+
+    }, [ setData ])
+    data && console.log(data);
 
     return (
         
-        <div className="wrapper .products-detail-wrapper">
+        <div className="wrapper products-detail-wrapper">
 
             <div className="product-detail-container">
 
                 <div className="image-wrapper">
-                    <img src={image} alt="" />
+                    <img src={data?.image} alt="" />
                 </div>
 
                 <div className="content-wrapper">
 
                     <div className="title-wrapper">
-                        { title }
+                        { data?.title }
                     </div>
                     
                     <div className="description"> 
-                        { description }
+                        { data?.description }
                     </div>
 
 
                     <div className="price">
-                        { price }
+                        { `$${ data?.price }` }
+                    </div>
+
+                    <div className="buttons-wrapper">
+                        <button type="button"> Add To Cart </button>
+                        <button type="button"> Buy Now </button>
                     </div>
 
                 </div>
