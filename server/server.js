@@ -4,6 +4,7 @@ const formData = require('express-form-data');
 const cors = require('cors');
 
 const userRoutes = require('./routes/users');
+const cartRoutes = require('./routes/carts');
 
 const PORT = process.env.PORT || 5405;
 const app = express();
@@ -18,3 +19,4 @@ app.use(cors(
 ))
 
 app.use('/api', userRoutes);
+app.use('/api', cartRoutes);
